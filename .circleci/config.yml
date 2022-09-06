@@ -98,7 +98,7 @@ jobs:
       - restore_cache:
           keys: [frontend-scan]
       - run:
-          name: Trond-end scan
+          name: Frond-end scan
           command: |
             cd frontend; npm install; npm audit fix --audit-level=critical --force; npm audit --audit-level=critical
 
