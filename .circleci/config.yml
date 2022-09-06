@@ -112,7 +112,7 @@ jobs:
       - run:
           name: Back-end scan
           command: |
-            cd backend; npm install; npm audit fix --audit-level=critical --force; npm audit --audit-level=critical
+            cd backend; npm install; Run  npm update mkdirp --depth; Run  npm install --save-dev webpack@5.74.0;  npm audit fix --audit-level=critical --force; npm audit --audit-level=critical
 
 #   deploy-infrastructure:
 #     docker:
