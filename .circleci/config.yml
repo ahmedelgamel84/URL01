@@ -121,7 +121,6 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -148,6 +147,10 @@ jobs:
             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --output text >> .circleci/ansible/inventory.txt
             
+      - run:
+          name: install tar
+          command: sudo apt-get install tar
+
       - persist_to_workspace:
           root: ~/
           paths:
