@@ -161,9 +161,6 @@ jobs:
       - add_ssh_keys:
           fingerprints: "	e3:3a:c7:87:1b:60:3c:2c:a5:68:90:9e:f7:92:37:f7"
       - run:
-          name: "Install Ansible"
-          command: apk add --update ansible
-      - run:
           name: "Install  tar"
           command: apk add --update  tar
       - run:
@@ -172,6 +169,10 @@ jobs:
       - run:
           name: "Install  awscli"
           command: apk add --update  awscli
+      - run:
+          name: "Install Ansible"
+          command: apk add --update ansible
+      
       - run:
           name: Run Playbook and Configure server
           command: cd .circleci/ansible; ansible-playbook -i inventory configure-server.yml
