@@ -146,11 +146,9 @@ jobs:
       #       --query 'Reservations[*].Instances[*].PublicIpAddress' \
       #       --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
       #       --output text >> .circleci/ansible/inventory.txt
-            
       - run:
-          name: install tar
-          command: sudo apt-get update && wget https://dl.winehq.org/wine/source/1.9/wine-1.9.19.tar.bz2 && sudo tar xzvf wine-1.9.19.tar.bz2
-
+          command: sudo apt update
+    
       - persist_to_workspace:
           root: ~/
           paths:
