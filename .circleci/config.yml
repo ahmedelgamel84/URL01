@@ -118,7 +118,7 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      - amazon/aws-cli
+      - image: amazon/aws-cli
     steps:
       - checkout
       - run:
@@ -139,12 +139,12 @@ jobs:
               --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7} \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
              
-      # - run:
-      #     name: Add back-end ip to ansible inventory
-      #     command: |
-      #       ansible aws ec2 describe-instances \
-      #         --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress}"  \
-      #         --output inventory.txt
+      - run:
+          name: Add back-end ip to ansible inventory
+          command: |
+            ansible aws ec2 describe-instances \
+              --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress}"  \
+              --output inventory.txt
             
       - persist_to_workspace:
           root: ~/
