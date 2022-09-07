@@ -172,7 +172,7 @@ jobs:
 
       - run:
           name: Run Playbook and Configure server
-          command: cd .circleci/ansible; ansible-playbook -i inventory configure-server.yml
+          command: cd .circleci/ansible; ansible-playbook -i inventory.txt configure-server.yml
 
       - persist_to_workspace:
           root: ~/
