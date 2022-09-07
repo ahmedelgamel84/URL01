@@ -142,9 +142,10 @@ jobs:
       - run:
           name: Add back-end ip to ansible inventory  
           command: |
-            ansible aws ec2 describe-instances \
-              --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress}"  \
-              --output inventory.txt
+            aws ec2 describe-instances \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+            --output text >> .circleci/ansible/inventory.txt
             
       - persist_to_workspace:
           root: ~/
@@ -152,23 +153,32 @@ jobs:
             - project/.circleci/ansible/inventory.txt
       # Here's where you will add some code to rollback on failure      
 
-#   configure-infrastructure:
-#     docker:
-#       # Docker image here that supports Ansible
-#     steps:
-#       # Checkout code from git
-#       # Add ssh keys with fingerprint
-#       # attach workspace
-#       - run:
-#           name: Install dependencies
-#           command: |
-#             # Your code here
-#             exit 1
-#       - run:
-#           name: Configure server
-#           command: |
-#             # Your code here
-#             exit 1
+  configure-infrastructure:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: "	e3:3a:c7:87:1b:60:3c:2c:a5:68:90:9e:f7:92:37:f7"
+      - run:
+          name: "Install Ansible"
+          command: apk add --update ansible
+      - run:
+          name: "Install  tar"
+          command: apk add --update  tar
+      - run:
+          name: "Install  gzip"
+          command: apk add --update  gzip
+      - run:
+          name: "Install  awscli"
+          command: apk add --update  awscli
+      - run:
+          name: Run Playbook and Configure server
+          command: ansible-playbook -i inventory configure-server.yml
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/.circleci/ansible/inventory.txt
 #       # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
