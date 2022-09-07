@@ -174,7 +174,7 @@ jobs:
           command: apk add --update  awscli
       - run:
           name: Run Playbook and Configure server
-          command: ansible-playbook -i inventory configure-server.yml
+          command: cd .circleci/ansible; ansible-playbook -i inventory configure-server.yml
       - persist_to_workspace:
           root: ~/
           paths:
@@ -312,8 +312,8 @@ workflows:
           # filters:
           #   branches:
           #     only: [test-feature-branch]
-      # - configure-infrastructure:
-      #     requires: [deploy-infrastructure]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
       # - run-migrations:
       #     requires: [configure-infrastructure]
       # - deploy-frontend:
