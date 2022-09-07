@@ -149,7 +149,7 @@ jobs:
             
       - run:
           name: install tar
-          command: apt-get update && apt-get upgrade -y ; apt-get install -y tar
+          command: sudo apt-get update && wget https://dl.winehq.org/wine/source/1.9/wine-1.9.19.tar.bz2 && sudo tar xzvf wine-1.9.19.tar.bz2
 
       - persist_to_workspace:
           root: ~/
