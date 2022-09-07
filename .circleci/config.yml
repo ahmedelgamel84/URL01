@@ -168,16 +168,12 @@ jobs:
       - run:
           name: Install ansible utility
           command: |
-            yum install -y ansible
+            pip3 install ansible
 
       - run:
           name: Run Playbook and Configure server
           command: cd .circleci/ansible; ansible-playbook -i inventory configure-server.yml
 
-      - run:
-          name: Install tar utility
-          command: |
-            yum install -y tar gzip
       - persist_to_workspace:
           root: ~/
           paths:
