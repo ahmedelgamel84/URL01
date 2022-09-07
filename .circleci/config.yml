@@ -151,7 +151,7 @@ jobs:
           name: Install tar utility
           command: |
             yum install -y tar gzip
-            
+
       - persist_to_workspace:
           root: ~/
           paths:
@@ -166,8 +166,18 @@ jobs:
       - add_ssh_keys:
           fingerprints: "	e3:3a:c7:87:1b:60:3c:2c:a5:68:90:9e:f7:92:37:f7"
       - run:
+          name: Install ansible utility
+          command: |
+            yum install -y ansible
+
+      - run:
           name: Run Playbook and Configure server
           command: cd .circleci/ansible; ansible-playbook -i inventory configure-server.yml
+
+      - run:
+          name: Install tar utility
+          command: |
+            yum install -y tar gzip
       - persist_to_workspace:
           root: ~/
           paths:
