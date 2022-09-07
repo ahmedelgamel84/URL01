@@ -121,11 +121,7 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-
-      - run:
-          name: "Install  tar "
-          command: apk add tar 
-
+      
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -160,18 +156,11 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: cimg/python:3.10.6
     steps:
       - checkout
       - add_ssh_keys:
           fingerprints: "	e3:3a:c7:87:1b:60:3c:2c:a5:68:90:9e:f7:92:37:f7"
-      - run:
-          name: "Install  tar tar gzip awscli"
-          command: apk add tar 
-      # - run:
-      #     name: "Install Ansible"  gzip awscli ansible
-      #     command: apk add --update ansible
-      
       - run:
           name: Run Playbook and Configure server
           command: cd .circleci/ansible; ansible-playbook -i inventory configure-server.yml
