@@ -330,10 +330,7 @@ workflows:
           filters:
             branches:
               only: [test-feature-branch]
-      - deploy-infrastructure:
-          requires: [build-frontend, build-backend]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
+    
       # - run-migrations:
       #     requires: [configure-infrastructure]
       # - deploy-frontend:
