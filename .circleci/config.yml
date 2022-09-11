@@ -207,7 +207,7 @@ jobs:
             - project/.circleci/ansible/inventory.txt
 #       # Here's where you will add some code to rollback on failure      
 
-  Install Node.js 13.8.0:
+  Install Node:
     docker:
       - image: cimg/python:3.10.6
     steps:
