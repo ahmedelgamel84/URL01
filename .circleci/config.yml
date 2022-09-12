@@ -406,7 +406,7 @@ jobs:
       - run:
           name: Update cloudfront distribution
           command: |
-            aws cloudformation deploy \
+            aws cloudformation update \
             --template-file .circleci/files/cloudfront.yml \
             --stack-name InitialStack \
             --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
@@ -414,7 +414,7 @@ jobs:
             echo "Current WOrkflow ID: ${CIRCLE_WORKFLOW_ID:0:7}"
       - destroy-environment
       - revert-migrations 
-
+      
 # cleanup:
 #     docker:
 #       # Docker image here
