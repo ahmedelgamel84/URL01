@@ -401,7 +401,7 @@ jobs:
             export OLD_WORKFLOW_ID=$(aws cloudformation list-exports \
             --query ""Exports[?Name==\`WorkflowID\`].Value"\
             --no-paginate --output text)
-            echo"Old WOrkflow ID: $OLD_WORKFLOW_ID"
+            echo "Old WOrkflow ID: $OLD_WORKFLOW_ID"
             curl https://kvdb.io/${YMrdWt7xQU4oP2uLAEUDzb}/old_workflow_id -d "${OLD_WORKFLOW_ID}" --insecure 
       - run:
           name: Update cloudfront distribution
