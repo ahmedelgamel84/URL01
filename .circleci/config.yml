@@ -401,7 +401,7 @@ jobs:
             export OLD_WORKFLOW_ID=$(aws cloudformation list-exports \
             --query "Exports[?Name==\`WorkflowID\`].Value" \
             --no-paginate --output text)
-            echo "Old WOrkflow ID: $OLD_WORKFLOW_ID"
+            echo "Old WOrkflow ID: ${OLD_WORKFLOW_ID}"
             curl https://kvdb.io/${YMrdWt7xQU4oP2uLAEUDzb}/old_workflow_id -d "${OLD_WORKFLOW_ID}" --insecure 
       - run:
           name: Update cloudfront distribution
@@ -438,8 +438,8 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
+      # - build-frontend
+      # - build-backend
       # - test-frontend:
       #     requires: [build-frontend]
       # - test-backend:
@@ -453,20 +453,20 @@ workflows:
           # filters:
           #   branches:
           #     only: [test-feature-branch]
-      - deploy-infrastructure:
-          requires: [build-frontend, build-backend]
-      - configure-infrastructure: 
-          requires: [deploy-infrastructure] 
-      - run-migrations:
-          requires: [configure-infrastructure]
-      - deploy-frontend:
-          requires: [run-migrations]
-      - deploy-backend:
-          requires: [run-migrations]
+      # - deploy-infrastructure:
+      #     requires: [build-frontend, build-backend]
+      # - configure-infrastructure: 
+      #     requires: [deploy-infrastructure] 
+      # - run-migrations:
+      #     requires: [configure-infrastructure]
+      # - deploy-frontend:
+      #     requires: [run-migrations]
+      # - deploy-backend:
+      #     requires: [run-migrations]
       # - smoke-test:
       #     requires: [deploy-backend, deploy-frontend]
-      - cloudfront-update:
-          requires: [deploy-backend]
+      - cloudfront-update
+          # requires: [deploy-backend]
       # - cleanup:
       #     requires: [cloudfront-update]
 
