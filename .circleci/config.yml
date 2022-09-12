@@ -443,7 +443,7 @@ jobs:
           command: |
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
-              aws s3 -rm s3://udapeople-${OldWorkflowID} --recursive
+              aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
               # Delete frontend stack
               aws cloudformation delete-stack --stack-name udapeople-frontend-${OldWorkflowID} 
               # Delete backend stack
