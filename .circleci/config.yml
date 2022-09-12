@@ -317,6 +317,8 @@ jobs:
           fingerprints: "	e3:3a:c7:87:1b:60:3c:2c:a5:68:90:9e:f7:92:37:f7"
       - restore_cache:
           keys: [backend-deps]
+      - attach_workspace:
+          at: ~/
       - run:
           name: Install dependencies
           command: |
@@ -328,7 +330,6 @@ jobs:
             cd backend
             npm run build
             tar -czf artifact.tar.gz dist/* package*
-
             cd ..
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
       - run:
