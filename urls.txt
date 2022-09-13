@@ -1,4 +1,0 @@
-URL01
-https://github.com/ahmedelgamel84/URL01
-URL02
-https://udapeople-817ed27.s3.amazonaws.com/index.html
