@@ -467,8 +467,6 @@ workflows:
           filters:
             branches:
               only: [master]
-      - deploy-infrastructure:
-          requires: [build-frontend, build-backend]
       - configure-infrastructure: 
           requires: [deploy-infrastructure] 
       - run-migrations:
