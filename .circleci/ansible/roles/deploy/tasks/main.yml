@@ -3,20 +3,22 @@
   file:
     path: ~/backend-app
     state: directory
+
 - name: "Unarchive backend files"
   unarchive:
     src: artifact.tar.gz
     dest: ~/backend-app
+
 - name: "Installing Node Dependencies"
   shell: |
     cd ~/backend-app
     npm i
+
 - name: "Executing Node app with PM2"
   shell: |
     cd ~/backend-app/dist
     pm2 stop default
     pm2 start main.js
-
   register: execute_node
 
 - name: print message
